@@ -19,7 +19,7 @@ export default function Spinner() {
       <div className="flex justify-center flex-col gap-2 items-center h-screen">
         <div className="animate-spin rounded-full h-32 w-32 border-4 border-gray-900 border-t-gray-200" />
         <div>Loading.....</div>
-        <div className="text-2xl text-teal-700">
+        <div className="text-2xl text-teal-700 text-center">
           you will be redirected in {count} seconds
         </div>
       </div>
