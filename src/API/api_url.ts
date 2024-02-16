@@ -1,0 +1,1 @@
+export const APP_API="https://ecommerce-api-v1.vercel.app/"

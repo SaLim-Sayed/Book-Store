@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  body {
+    @apply max-w-[100%] overflow-x-hidden   min-w-min min-h-screen;
+  }
+}
+
+body{
+  font-family: "Poppins", sans-serif;
+}
+.swiper-pagination-bullet-active {
+  background-color: #ffa458 !important;
+  width: 15px !important;
+  height: 15px !important;
+}
+.swiper-pagination {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.swiper-pagination-bullet-active-next {
+  width: 2px !important;
+  height: 2px !important;
+}
+.nav-link .active{
+  @apply text-orange-500 ;
+}
+.sm-nav-link .active{
+  @apply bg-orange-500 ;
+}
+
+ 
