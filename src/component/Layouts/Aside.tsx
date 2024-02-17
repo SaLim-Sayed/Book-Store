@@ -38,7 +38,9 @@ const Aside: React.FC = () => {
       key: "0",
     },
     {
-      label: <NavLink to="/dashboard">Dashboard</NavLink>,
+      label:<NavLink to={`/dashboard/${user?.role ===1 ? "admin" : "user"}`}>
+      Dashboard
+    </NavLink>,
       key: "1",
     },
   ];

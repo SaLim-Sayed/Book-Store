@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export default function Spinner() {
+export default function Spinner({ path = "login" }: { path?: string }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [count, setCount] = useState(5);
@@ -10,10 +10,10 @@ export default function Spinner() {
       setCount((c) => c - 1);
     }, 1000);
     if (count === 0) {
-      navigate("/login", { state: location.pathname });
+      navigate(`/${path}`, { state: location.pathname });
     }
     return () => clearInterval(timer);
-  }, [count, navigate,location]);
+  }, [count, navigate, location, path]);
   return (
     <div>
       <div className="flex justify-center flex-col gap-2 items-center h-screen">
