@@ -19,6 +19,7 @@ import Category from "./component/pages/Category/Category";
 import Orders from "./component/pages/User/Orders/Orders";
 import Profile from "./component/pages/User/Profile";
 import { axiosInstance } from "./API/api_url";
+import ProductDetails from "./component/Product/Product";
 
 function App() {
   const { token } = useUserStore();
@@ -40,6 +41,7 @@ function App() {
           <Route path="admin/product" element={<Product />} />
           <Route path="admin/category" element={<Category />} />
         </Route>
+        <Route path="/product/:slug" element={<ProductDetails />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/policy" element={<Policy />} />
