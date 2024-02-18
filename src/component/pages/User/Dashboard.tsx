@@ -7,7 +7,7 @@ export default function Dashboard() {
   return (
     <UserLayout>
       <Center>
-        <h1 className=" bg-slate-600 text-white mx-8 p-4 uppercase text-2xl text-center">
+        <h1 className=" bg-slate-600 text-white mx-0 md:mx-8 p-4 uppercase text-2xl text-center">
           Dashboard
         </h1>
         <div className="flex mx-8 text-xl flex-col gap-2">

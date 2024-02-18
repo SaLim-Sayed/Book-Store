@@ -18,10 +18,13 @@ import Product from "./component/pages/Product/Product";
 import Category from "./component/pages/Category/Category";
 import Orders from "./component/pages/User/Orders/Orders";
 import Profile from "./component/pages/User/Profile";
+import { axiosInstance } from "./API/api_url";
 
 function App() {
   const { token } = useUserStore();
   axios.defaults.headers.common["Authorization"] = token;
+  axiosInstance.defaults.headers.common["Authorization"] = token;
+
   return (
     <div>
       <Routes>

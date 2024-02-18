@@ -7,7 +7,7 @@ import RegisterForm from "./RegisterForm";
 export default function AdminDashboard() {
   return (
     <AdminLayout>
-      <h1 className=" bg-slate-600 text-white mx-8 p-4 uppercase text-2xl text-center">
+      <h1 className=" bg-slate-600 text-white mx-0 md:mx-8 p-4 uppercase text-2xl text-center">
         Admin Profile
       </h1>
       <Center>
