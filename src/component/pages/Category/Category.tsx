@@ -1,31 +1,40 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import AdminLayout from "../../Layouts/AdminLayout";
 import Center from "../../UI/Center";
 import { axiosInstance } from "../../../API/api_url";
-import { Space, Table } from "antd";
+import { Space, Table, message } from "antd";
 import { Button, useDisclosure } from "@nextui-org/react";
 
 import CreateForm from "./CreateForm";
-
+import EditForm from "./EditForm";
+import { useCategoryStore } from "../../../store/useCategoryStore";
+import { AiFillDelete } from "react-icons/ai";
+interface ICategory {
+  name: string;
+  _id: string;
+  slug: string;
+}
 export default function Category() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [categories, setCategories] = useState<any[]>();
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-
-      action: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-
-      action: "10 Downing Street",
-    },
-  ];
-
+  const { categories, setCategories } = useCategoryStore();
+  const [update, setUpdate] = useState(false);
+  const deleteCategory = async (id: string) => {
+    try {
+      const res = await axiosInstance.delete(
+        `api/v1/category/delete-category/${id}`
+      );
+      if (res.data.success) {
+        setUpdate(!update);
+        message.success(res.data?.message);
+      } else {
+        message.error(res.data?.message);
+      }
+    } catch (error) {
+      message.error("Something went wrong");
+    }
+  };
   const columns = [
     {
       title: "Name",
@@ -37,10 +46,22 @@ export default function Category() {
       title: "Action",
       dataIndex: "action",
       key: "action",
-      render: () => (
+      render: (_: any, record: ICategory) => (
         <Space size="middle">
-          <Button color="primary">Edit</Button>
-          <Button color="danger">Delete</Button>
+          <EditForm
+            update={update}
+            setUpdate={setUpdate}
+            title="Edit"
+            record={record}
+          />
+
+          <Button
+            isIconOnly
+            onClick={() => deleteCategory(record._id)}
+            color="danger"
+          >
+            <AiFillDelete size={24} />
+          </Button>
         </Space>
       ),
     },
@@ -50,22 +71,23 @@ export default function Category() {
       const res = await axiosInstance.get("/api/v1/category/get-category");
       if (res.data.success) {
         setCategories(res?.data?.category);
-        console.log(res.data?.category);
       }
     } catch (error) {
-      console.log(error);
+      message.error("Something went wrong");
     }
   };
+
   useEffect(() => {
     getAllCategory();
   }, []);
   useEffect(() => {
     getAllCategory();
-  }, [isOpen]);
+  }, [update, isOpen]);
+
   return (
     <AdminLayout>
       <Center>
-        <h1 className=" bg-slate-600 text-white mx-0 p-4 uppercase text-2xl text-center flex justify-between">
+        <h1 className=" bg-slate-600 text-white mx-0 p-1  py-4 uppercase text-lg text-center flex items-center gap-2 justify-between">
           Category Dashboard
           <CreateForm
             onOpenChange={onOpenChange}
@@ -75,10 +97,9 @@ export default function Category() {
         </h1>
         <Table
           pagination={{ pageSize: 3 }}
-          dataSource={categories ? categories : dataSource}
+          dataSource={categories} // Use categories directly as the data source
           columns={columns}
         />
-         
       </Center>
     </AdminLayout>
   );

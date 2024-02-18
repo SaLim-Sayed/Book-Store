@@ -4,7 +4,6 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   Button,
   Input,
 } from "@nextui-org/react";
@@ -69,52 +68,45 @@ export default function CreateForm({
   };
   return (
     <>
-      <Button onPress={onOpen}>
+  <Button color="warning" endContent={<BiPlus size={24} />} onPress={onOpen}>
         {" "}
-        <BiPlus size={24} />
+        Create{" "}
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal isOpen={isOpen} placement="center" onOpenChange={onOpenChange}>
         <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                Create Category
-              </ModalHeader>
-              <ModalBody>
-                <form
-                  className="w-full flex  flex-col gap-[20px]"
-                  onSubmit={handleSubmit(onSubmit)}
+          <>
+            <ModalHeader className="flex flex-col gap-1">
+              Create Category
+            </ModalHeader>
+            <ModalBody>
+              <form
+                className="w-full flex  flex-col gap-[20px]"
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <div>
+                  <Input
+                    {...register("name")}
+                    type="text"
+                    label="name"
+                    variant="bordered"
+                    className="w-full"
+                    isInvalid={errors.name ? true : false}
+                    errorMessage={errors.name?.message}
+                    classNames={{
+                      input: "text-[1.2rem]",
+                    }}
+                  />
+                </div>
+                <Button
+                  isLoading={isLoading}
+                  type="submit"
+                  className="bg-cyan-700   text-lg text-white "
                 >
-                  <div>
-                    <Input
-                      {...register("name")}
-                      type="text"
-                      label="name"
-                      variant="bordered"
-                      className="w-full"
-                      isInvalid={errors.name ? true : false}
-                      errorMessage={errors.name?.message}
-                      classNames={{
-                        input: "text-[1.2rem]",
-                      }}
-                    />
-                  </div>
-                  <Button
-                    isLoading={isLoading}
-                    type="submit"
-                    className="bg-cyan-500   text-lg text-white font-bold"
-                  >
-                    Create
-                  </Button>
-                </form>
-              </ModalBody>
-              <ModalFooter>
-                <Button color="primary" onPress={onClose}>
-                  Action
+                  Create
                 </Button>
-              </ModalFooter>
-            </>
-          )}
+              </form>
+            </ModalBody>
+          </>
         </ModalContent>
       </Modal>
     </>
