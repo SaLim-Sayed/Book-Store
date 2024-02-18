@@ -1,16 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {create} from 'zustand';
 
-interface ICategory {
-  name: string;
-  _id: string;
-  slug: string;
-  
-  // Add more properties as needed
-}
-
 interface CategoryStore {
-  categories: ICategory[] | undefined  ;
-  setCategories: (categories: ICategory[] | undefined) => void;
+  categories: any   ;
+  setCategories: (categories: any ) => void;
 }
 
 export const useCategoryStore = create<CategoryStore>((set) => ({

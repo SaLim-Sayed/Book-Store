@@ -105,7 +105,7 @@ export default function Header() {
   );
  */
   return (
-    <div className="sticky top-0 bg-white  w-full z-[500] shadow-lg">
+    <div className="sticky top-0 bg-white  w-full z-[50] shadow-lg">
       <Center nav>
         <nav
           className={
