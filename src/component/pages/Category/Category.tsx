@@ -78,7 +78,7 @@ export default function Category() {
           dataSource={categories ? categories : dataSource}
           columns={columns}
         />
-        ;
+         
       </Center>
     </AdminLayout>
   );
